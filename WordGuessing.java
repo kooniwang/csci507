@@ -16,15 +16,18 @@ import java.util.Scanner;
 public class WordGuessing {
     String[] wordBook = {"Cat", "Dog", "Rabbit", "Fish", "Bird", "Hedgehog", "Ferret", "Horse"};
     String secretPick;
+    long inputTime;
     public void run(){
-
         System.out.println("There are 8 kinds of pets: " + Arrays.toString(wordBook) + "."
                 + "\nI've picked one for you. Guess what is it? (Only 5 guesses allowed!)");
         Scanner scanner = new Scanner(System.in);
         secretPick = wordBook[new Random().nextInt(0, 8)];
         int i = 0;
         while(i++ < 5){
+            long inputBeginTime = System.currentTimeMillis();
             String guess = scanner.nextLine();
+            long inputEndTime = System.currentTimeMillis();
+            inputTime += inputEndTime - inputBeginTime;
             if(!guess.equalsIgnoreCase(secretPick))
                 System.out.println("Sorry, you lost! (" + i + " try)");
             else{
@@ -34,12 +37,18 @@ public class WordGuessing {
         }
     }
     public static void main(String[] args){
+        //add the compilation time
         long beginTime = System.currentTimeMillis();
+        long beforeUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 
         WordGuessing game = new WordGuessing();
         game.run();
 
         long endTime = System.currentTimeMillis();
+        long afterUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+
+        System.out.println("The compile time is: " + (endTime -beginTime - game.inputTime) + " ms");
         System.out.println("The execution time is: " + (endTime - beginTime)/1000 + " s");
+        System.out.println("The memory usage is: " + (afterUsedMem - beforeUsedMem) + " bytes");
     }
 }
