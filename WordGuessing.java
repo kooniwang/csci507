@@ -37,7 +37,6 @@ public class WordGuessing {
         }
     }
     public static void main(String[] args){
-        //add the compilation time
         long beginTime = System.currentTimeMillis();
         long beforeUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 
