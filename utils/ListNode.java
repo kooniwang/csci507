@@ -42,9 +42,8 @@ public class ListNode<E> {
 
     @Override
     public String toString() {
-//        return "0";
-        if (! this.hasNext())
-            return "[]";
+        if(this.val == null) return "[]";
+        if (!this.hasNext()) return "[" + this.val + "]";
 
         StringBuilder sb = new StringBuilder();
         sb.append('[');
