@@ -1,14 +1,14 @@
 import utils.TreeNode;
 import java.util.*;
 
-public class BasicTreeOperation {
-    TreeNode<String> root;
-    HashMap<String, TreeNode<String>> cityMap = new HashMap<>();
+public class BasicTreeOperation<E> {
+    TreeNode<E> root;
+    HashMap<String, TreeNode<E>> cityMap = new HashMap<>();
 
-    public void addChildNode(TreeNode<String> parent, TreeNode<String> child){
+    public void addChildNode(TreeNode<E> parent, TreeNode<E> child){
         if(parent == null) this.root = child;
         else{
-            TreeNode<String> node = getNode(root, parent);
+            TreeNode<E> node = getNode(root, parent);
             if(node != null){
                 if(node.hasChildren()) node.getChildren().add(child);
                 else{
@@ -16,26 +16,26 @@ public class BasicTreeOperation {
                 }
             }
         }
-        cityMap.put(child.getVal().toLowerCase(), child);
+        cityMap.put(child.getVal().toString(), child);
 
     }
 
     //get the maximum of the children's height
-    public int getHeight(TreeNode<String> city){
+    public int getHeight(TreeNode<E> city){
         if(city == null) return -1;
         int maxH = -1;
         if(city.hasChildren()){
-            for(TreeNode<String> node : city.getChildren()){
+            for(TreeNode<E> node : city.getChildren()){
                 int nodeH = getHeight(node);
                 if(nodeH > maxH) maxH = nodeH;
             }
         }
         return ++maxH;
     }
-    public int getDepth(TreeNode<String> root, TreeNode<String> city, int depth){
+    public int getDepth(TreeNode<E> root, TreeNode<E> city, int depth){
         if(root.getVal().equals(city.getVal())) return depth;
         if(root.hasChildren()){
-            for(TreeNode<String> node : root.getChildren()){
+            for(TreeNode<E> node : root.getChildren()){
                 int dp = getDepth(node, city, depth+1);
                 if(dp != -1) return dp;
             }
@@ -43,18 +43,18 @@ public class BasicTreeOperation {
         return -1;
     }
 
-    public TreeNode<String> getNode(TreeNode<String> root, TreeNode<String> city){
+    public TreeNode<E> getNode(TreeNode<E> root, TreeNode<E> city){
         if(root.getVal().equals(city.getVal())) return root;
         if(root.hasChildren()){
-            for(TreeNode<String> node : root.getChildren()){
-                TreeNode<String> pivot = getNode(node, city);
+            for(TreeNode<E> node : root.getChildren()){
+                TreeNode<E> pivot = getNode(node, city);
                 if(pivot != null) return pivot;
             }
         }
         return null;
     }
 
-    public String displayDepthandHeight(TreeNode<String> root, TreeNode<String> city){
+    public String displayDepthandHeight(TreeNode<E> root, TreeNode<E> city){
         if(city == null) return "This city doesn't exist!";
         return city.getVal() + "'s depth is: " + getDepth(root, city, 0) + ", height is: "+ getHeight(city);
     }
@@ -82,7 +82,7 @@ public class BasicTreeOperation {
         TreeNode<String> yaleTown = new TreeNode<>("Yale Town");
 
         //construct the connections between parent and children
-        BasicTreeOperation var = new BasicTreeOperation();
+        BasicTreeOperation<String> var = new BasicTreeOperation<>();
         var.addChildNode(null, bc);
         var.addChildNode(bc, burnaby);
             var.addChildNode(burnaby, metroTown);
