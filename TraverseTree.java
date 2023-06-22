@@ -36,7 +36,7 @@ public class TraverseTree<E> {
     }
 
     public void preOrder(BinaryTreeNode<E> root){
-        System.out.println(root.getVal());
+        System.out.print(root.getVal() + " ");
         if(root.getLeft() != null){
             preOrder(root.getLeft());
         }
@@ -50,7 +50,7 @@ public class TraverseTree<E> {
         if(root.getLeft() != null){
             inOrder(root.getLeft());
         }
-        System.out.println(root.getVal());
+        System.out.print(root.getVal() + " ");
         if(root.getRight() != null){
             inOrder(root.getRight());
         }
@@ -64,7 +64,7 @@ public class TraverseTree<E> {
             postOrder(root.getRight());
         }
 
-        System.out.println(root.getVal());
+        System.out.print(root.getVal() + " ");
     }
     public static void main(String[] args){
         TraverseTree<Integer> var = new TraverseTree<>();
@@ -80,9 +80,9 @@ public class TraverseTree<E> {
 
         System.out.println("PreOrder: ");
         var.preOrder(root);
-        System.out.println("InOrder: ");
+        System.out.println("\nInOrder: ");
         var.inOrder(root);
-        System.out.println("PostOrder: ");
+        System.out.println("\nPostOrder: ");
         var.postOrder(root);
 
     }
